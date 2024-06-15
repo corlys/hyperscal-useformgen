@@ -1,8 +1,8 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { FormGeneratorProps } from "@/components/form/types";
 import { FormGeneratorLoader } from "@/components/form/FormGeneratorLoader";
-import { FormField } from "@/components/form/FormFields";
+import { default as FormField } from "@/components/form/FormFields";
 
 const FormGenerator = React.forwardRef<HTMLFormElement, FormGeneratorProps>(
   ({ schema, state: formGenState, model, updateModelValue }) => {
@@ -15,6 +15,7 @@ const FormGenerator = React.forwardRef<HTMLFormElement, FormGeneratorProps>(
       <>
         {schema.definitions.map((field) => (
           <FormField
+            key={field.name}
             field={field}
             path={field.name} // if you are wondering why
             value={model?.[field.name]}

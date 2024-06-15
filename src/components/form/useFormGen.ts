@@ -62,7 +62,7 @@ export function useFormGen(
         return newModel;
       });
     },
-    [model, state],
+    [],
   );
 
   const handleValidFlow = async (
@@ -138,4 +138,3 @@ export function useFormGen(
     handleSubmit,
   };
 }
-

@@ -3,6 +3,7 @@ import { FormFieldProps } from "@/components/form/types";
 import { TextField } from "@/components/form/fields/TextField";
 import { FormLabel } from "@/components/form/FormLabel";
 import { PasswordField } from "@/components/form/fields/PasswordField";
+import deepEqual from "@/utils/deepEqual";
 
 const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
   ({ field, path, value, errors, updateModelValue, ...props }, ref) => {
@@ -38,5 +39,8 @@ const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
 
 FormField.displayName = "FormField";
 
-export { FormField };
+const MemoizedFormField = React.memo(FormField, function (prev, next) {
+  return deepEqual(prev, next);
+});
 
+export default MemoizedFormField;
