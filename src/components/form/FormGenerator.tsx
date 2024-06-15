@@ -5,12 +5,12 @@ import { FormGeneratorLoader } from "@/components/form/FormGeneratorLoader";
 import { default as FormField } from "@/components/form/FormFields";
 
 const FormGenerator = React.forwardRef<HTMLFormElement, FormGeneratorProps>(
-  ({ schema, state: formGenState, model, updateModelValue }) => {
+  ({ schema, state: formGenState, model, updateModelValue }, ref) => {
     if (formGenState.isLoading) {
       return <FormGeneratorLoader />;
     }
 
-    // TODO: Challenge #5 last_name re-rendered as I change value for first_name. Figure how to optimize this.
+    // DONE: Challenge #5 last_name re-rendered as I change value for first_name. Figure how to optimize this.
     return (
       <>
         {schema.definitions.map((field) => (
