@@ -56,16 +56,20 @@ export default function LoginPage() {
   // TODO: Optional Challenge #1 - Use tailwindcss to style the login page
   return (
     <div className="w-full md:w-96">
-      <form onSubmit={handleSubmit(handleLogin)}>
+      <form
+        onSubmit={handleSubmit(handleLogin)}
+        className="flex flex-col items-start jutify-center gap-4"
+      >
         <FormGenerator
           schema={schema}
           state={state}
           model={model}
           updateModelValue={updateModelValue}
         />
-        <Button type={"submit"}>Submit</Button>
+        <Button className="self-end mt-4" type={"submit"}>
+          Submit
+        </Button>
       </form>
     </div>
   );
 }
-

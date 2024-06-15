@@ -39,22 +39,28 @@ export default function FormPage() {
   };
   // DONE: Challenge #2: Browser console is throwing a warning. Fix it.
   return (
-    <>
+    <div className="flex flex-col gap-4 jutify-center items-start w-full md:w-96">
       <h1>Form Page</h1>
-      <form onSubmit={handleSubmit(logSubmit)}>
+      <form
+        onSubmit={handleSubmit(logSubmit)}
+        className="flex flex-col items-start jutify-center gap-4 w-full"
+      >
         <FormGenerator
           schema={schema}
           state={state}
           model={model}
           updateModelValue={updateModelValue}
         />
-        <Button type={"submit"}>Submit</Button>
+        <Button className="self-end" type={"submit"}>
+          Submit
+        </Button>
       </form>
-      <hr />
+      <hr className="h-px w-full" />
       <form action={logout}>
-        <button type={"submit"}>Logout</button>
+        <Button type="submit" variant="destructive">
+          Logout
+        </Button>
       </form>
-    </>
+    </div>
   );
 }
-

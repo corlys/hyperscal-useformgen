@@ -25,7 +25,7 @@ const PasswordField = React.forwardRef<HTMLInputElement, TextFieldProps>(
     };
 
     return (
-      <div className="flex flex-row justify-between">
+      <div className="flex flex-row justify-between gap-2">
         <Input
           type={showPassword ? "text" : field.type}
           ref={ref}
@@ -35,7 +35,11 @@ const PasswordField = React.forwardRef<HTMLInputElement, TextFieldProps>(
           value={value}
           onChange={(e) => updateModelValue(path, field, e.target.value)}
         />
-        <Button variant={"secondary"} onClick={handleShowPassword}>
+        <Button
+          type="button"
+          variant={"secondary"}
+          onClick={handleShowPassword}
+        >
           <Eye />
         </Button>
       </div>
@@ -45,4 +49,3 @@ const PasswordField = React.forwardRef<HTMLInputElement, TextFieldProps>(
 
 PasswordField.displayName = "PasswordField";
 export { PasswordField };
-
