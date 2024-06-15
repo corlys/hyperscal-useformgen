@@ -2,6 +2,7 @@ import React from "react";
 import { FormFieldProps } from "@/components/form/types";
 import { TextField } from "@/components/form/fields/TextField";
 import { FormLabel } from "@/components/form/FormLabel";
+import { PasswordField } from "@/components/form/fields/PasswordField";
 
 const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
   ({ field, path, value, errors, updateModelValue, ...props }, ref) => {
@@ -11,6 +12,9 @@ const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
       switch (field.type) {
         case "text":
           Component = TextField;
+          break;
+        case "password":
+          Component = PasswordField;
           break;
         default:
           return <></>;
