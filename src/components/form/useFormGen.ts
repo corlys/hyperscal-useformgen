@@ -14,7 +14,7 @@ import set from "@/utils/set";
 import deepEqual from "@/utils/deepEqual";
 import { PrimitiveValues } from "@/utils/types";
 
-// TODO: Challenge #1 - There's bug hidden in this file.
+// DONE: Challenge #1 - There's bug hidden in this file.
 export function useFormGen(
   props: UseFormGeneratorProps,
 ): UseFormGeneratorReturn {
@@ -59,7 +59,7 @@ export function useFormGen(
       setModel((prev) => {
         const newModel = cloneObject(prev);
         set(newModel, path, value);
-        return prev;
+        return newModel;
       });
     },
     [model, state],
