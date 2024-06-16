@@ -4,6 +4,7 @@ import { FormModel, FormSchema } from "@/components/form/types";
 import { useFormGen } from "@/components/form/useFormGen";
 import { FormGenerator } from "@/components/form/FormGenerator";
 import { Button } from "@/components/ui/button";
+import { formSchemaToZodSchema } from "@/utils/formSchemaToZod";
 
 export default function FormPage() {
   const schema = {
@@ -24,9 +25,12 @@ export default function FormPage() {
     ],
   } as FormSchema;
 
+  const zodSchema = formSchemaToZodSchema(schema);
+
   const { state, model, updateModelValue, handleSubmit } = useFormGen({
     schema: schema,
     model: { first_name: "", last_name: "" },
+    zodSchema,
   });
 
   // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
