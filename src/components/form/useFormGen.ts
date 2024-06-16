@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { ZodTypeAny, ZodError, ZodSchema, z } from "zod";
 import {
   FieldDefinition,
   FormErrors,
@@ -122,13 +123,18 @@ export function useFormGen(
         };
       });
       const modelForSubmit = cloneObject(model);
-      if (Object.keys(state.errors).length > 0) {
-        if (onInvalid) {
-          await handleInvalidFlow(onInvalid, modelForSubmit);
+      const result = props.zodSchema.safeParse(modelForSubmit);
+      if (result.success) {
+        if (Object.keys(state.errors).length > 0) {
+          if (onInvalid) {
+            await handleInvalidFlow(onInvalid, modelForSubmit);
+          }
+          return;
         }
-        return;
+        await handleValidFlow(onValid, modelForSubmit);
+      } else {
+        console.log(result.error.issues);
       }
-      await handleValidFlow(onValid, modelForSubmit);
     };
 
   return {

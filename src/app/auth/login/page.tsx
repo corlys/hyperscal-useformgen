@@ -4,6 +4,8 @@ import { useFormGen } from "@/components/form/useFormGen";
 import { FormGenerator } from "@/components/form/FormGenerator";
 import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
+import { formSchemaToZodSchema } from "@/utils/formSchemaToZod";
+import { z, ZodSchema } from "zod";
 export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -47,9 +49,12 @@ export default function LoginPage() {
     ],
   } as FormSchema;
 
+  const zodSchema = formSchemaToZodSchema(schema);
+
   const { state, model, updateModelValue, handleSubmit } = useFormGen({
     schema: schema,
     model: { email: "", user_password: "" },
+    zodSchema,
   });
 
   // DONE: Challenge: #4 - Change to use form generator with useFormGenerator hook and do the submit
