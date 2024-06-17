@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormFieldProps } from "@/components/form/types";
 import { TextField } from "@/components/form/fields/TextField";
 import { FormLabel } from "@/components/form/FormLabel";
@@ -30,6 +30,16 @@ const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
             path={path}
             updateModelValue={updateModelValue}
           />
+          {errors &&
+            errors.map((err, index) => {
+              const key = Object.keys(err)[0];
+              const content = err[key];
+              return (
+                <p key={index} className="text-red-500">
+                  {typeof content.value === "string" && content.value}
+                </p>
+              );
+            })}
         </FormLabel>
       );
     };

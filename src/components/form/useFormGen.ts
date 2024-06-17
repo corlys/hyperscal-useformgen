@@ -124,17 +124,24 @@ export function useFormGen(
       });
       const modelForSubmit = cloneObject(model);
       const result = props.zodSchema.safeParse(modelForSubmit);
-      if (result.success) {
-        if (Object.keys(state.errors).length > 0) {
-          if (onInvalid) {
-            await handleInvalidFlow(onInvalid, modelForSubmit);
-          }
-          return;
-        }
-        await handleValidFlow(onValid, modelForSubmit);
+      const errors: FormErrors = {};
+      if (!result.success) {
+        result.error.issues.forEach((err) => {
+          const error = errors[err.path?.[0]] || [];
+          error.push({ [err.code]: { type: "error", value: err.message } });
+          errors[err.path?.[0]] = error;
+        });
+        setState((prevState) => ({ ...prevState, errors }));
       } else {
-        console.log(result.error.issues);
+        setState((prevState) => ({ ...prevState, errors }));
       }
+      if (Object.keys(errors).length > 0) {
+        if (onInvalid) {
+          await handleInvalidFlow(onInvalid, modelForSubmit);
+        }
+        return;
+      }
+      await handleValidFlow(onValid, modelForSubmit);
     };
 
   return {
