@@ -28,7 +28,7 @@ const formSchemaToZodSchema = (schema: FormSchema) => {
           break;
       }
     });
-    if (required) {
+    if (!required) {
       zodSchema = zodSchema.optional();
     }
     schemaTemplate[item.name] = zodSchema;
