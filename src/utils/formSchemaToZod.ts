@@ -13,10 +13,22 @@ const formSchemaToZodSchema = (schema: FormSchema) => {
         invalid_type_error: "wrong value provided",
       })
       .min(1, "cannot be empty");
-    if (item.name === "email") {
-      zodSchema = (zodSchema as ZodString).email("Please enter valid email");
-    }
-    if (!item.rules?.some((item) => item.name === "required")) {
+    let required = false;
+    item.rules?.forEach((rule) => {
+      switch (rule.name) {
+        case "required":
+          required = true;
+          break;
+        case "email":
+          zodSchema = (zodSchema as ZodString).email(
+            "Please enter valid email",
+          );
+          break;
+        default:
+          break;
+      }
+    });
+    if (required) {
       zodSchema = zodSchema.optional();
     }
     schemaTemplate[item.name] = zodSchema;
