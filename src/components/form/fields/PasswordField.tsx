@@ -25,19 +25,20 @@ const PasswordField = React.forwardRef<HTMLInputElement, TextFieldProps>(
     };
 
     return (
-      <div className="flex flex-row justify-between gap-2">
+      <div className="flex flex-row justify-between">
         <Input
           type={showPassword ? "text" : field.type}
           ref={ref}
           name={field.name}
           id={path}
+          className="rounded-r-none"
           // @ts-ignore
           value={value}
           onChange={(e) => updateModelValue(path, field, e.target.value)}
         />
         <Button
           type="button"
-          variant={"secondary"}
+          className="rounded-l-none rounded-r-md bg-white hover:bg-white border border-input border-l-white"
           onClick={handleShowPassword}
         >
           <Eye />

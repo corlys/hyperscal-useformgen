@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { FormFieldProps } from "@/components/form/types";
 import { TextField } from "@/components/form/fields/TextField";
 import { FormLabel } from "@/components/form/FormLabel";
@@ -43,14 +43,14 @@ const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
         </FormLabel>
       );
     };
-    return generateField();
+    return useMemo(() => generateField(), [value, errors]);
   },
 );
 
 FormField.displayName = "FormField";
 
-const MemoizedFormField = React.memo(FormField, function (prev, next) {
-  return deepEqual(prev, next);
-});
+// const MemoizedFormField = React.memo(FormField, function (prev, next) {
+//   return deepEqual(prev, next);
+// });
 
-export default MemoizedFormField;
+export default FormField;

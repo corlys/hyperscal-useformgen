@@ -71,8 +71,8 @@ export default function LoginPage() {
           model={model}
           updateModelValue={updateModelValue}
         />
-        <Button className="self-end mt-4" type={"submit"}>
-          Submit
+        <Button className="w-full mt-4" type={"submit"}>
+          Log In
         </Button>
       </form>
     </div>
